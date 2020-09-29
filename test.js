@@ -1,6 +1,15 @@
-let today = new Date(Date.now());
-console.log(today.getTime())
-  today = today.getTime() - 25200000;
-    today = new Date(today);
-    today = today.toISOString()
-    console.log(today)
+Promise.all([Time.find({}), User.find({})])
+    .then((times, users) => {
+       return times.map(time => {
+           return users.map(user => {
+                if(user.myTimeIds.includes(time._id)){
+                    return {
+                        email : user.email,
+                        time : time.time,
+                        roomeName : time.roomName[0]
+                    }
+                }
+                else return
+            })
+        })
+    })
